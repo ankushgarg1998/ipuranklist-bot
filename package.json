@@ -2,7 +2,7 @@
   "name": "ipuranklist-bot",
   "version": "1.0.0",
   "description": "A telegram bot for IPU Results notifications.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,8 +12,6 @@
     "axios": "^0.20.0",
     "jsdom": "^16.4.0",
     "node-cron": "^2.0.3",
-    "nodemon": "^2.0.4",
-    "telegraf": "^3.38.0",
-    "telegram-node-bot": "^4.0.5"
+    "telegraf": "^3.38.0"
   }
 }
