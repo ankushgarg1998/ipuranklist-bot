@@ -1,11 +1,16 @@
 # The IPU Ranklist Telegram Bot (Under Construction)
 
-[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=102)](https://github.com/ankushgarg1998/telegram-bot)  &nbsp;&nbsp;
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ankushgarg1998/telegram-bot)  &nbsp;&nbsp;
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ankushgarg1998/telegram-bot)
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=102)](https://github.com/ankushgarg1998/ipuranklist-bot)  &nbsp;&nbsp;
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ankushgarg1998/ipuranklist-bot)  &nbsp;&nbsp;
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ankushgarg1998/ipuranklist-bot)
 
 
 In very simple words, the [**IPU Ranklist Bot**]((https://web.telegram.org/#/im?p=@ipuranklist_bot)) is a [telegram bot](https://telegram.org/blog/bot-revolution) that notifies you about updates on the [GGSIPU website](http://ipu.ac.in/), so that you don't have to reload it a thousand times a day waiting for a result, datesheet or circular. 
+
+<img src="./screenshots/1.jpg" alt="screenshot" width="250px"/>&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="./screenshots/2.jpg" alt="screenshot" width="250px"/>&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="./screenshots/3.jpg" alt="screenshot" width="250px"/>
+
 
 ### It's exactly what I needed. How does it work?
 - Subscribe to the datesheet/results/circulars page, depending on whichever you're expecting to be announced soon.
@@ -24,14 +29,14 @@ To simply put, Telegram is a messaging application on steroids. If you're thinki
 ---
 
 ## FEATURES
-- Check last 10 (Results/ Datesheets/ Cirulars).
-- Subscribe to the (Results/ Datesheets/ Cirulars) page.
-- Unsubscribe.
+- Check recent Results/ Datesheets/ Cirulars on the website.
+- Subscribe to the Results/ Datesheets/ Cirulars page. So you'll be notified whenever a new file is uploaded on that page.
+- Unsubscribe to stop receiving further updates.
 
 ## COMMANDS
 Control the IPU Ranklist Bot by sending these commands:
 
-- **/help** - Gets this message anytime, if you're stuck.
+- **/help** - Gets a list of commands, for when you're stuck.
 
 ### Fetching last 10 uploads
 - **/results** - To fetch the last 10 results uploaded.
@@ -50,7 +55,7 @@ Control the IPU Ranklist Bot by sending these commands:
 
 
 ## TECH
-It is developed in [NodeJS](https://nodejs.org/en/) using the awesome [Telegraf](https://telegraf.js.org) and [node-cron](https://github.com/node-cron/node-cron) libraries. is live on Telegram as [@ipuranklist_bot](https://web.telegram.org/#/im?p=@ipuranklist_bot). 
+It is developed in [NodeJS](https://nodejs.org/en/) using the awesome [Telegraf](https://telegraf.js.org) and [node-cron](https://github.com/node-cron/node-cron) libraries. It uses MongoDB database and is live on Telegram as [@ipuranklist_bot](https://web.telegram.org/#/im?p=@ipuranklist_bot). 
 
 
 <hr>
