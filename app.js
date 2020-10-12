@@ -109,8 +109,20 @@ function handleCronExecution(entryType) {
     axios.get(dataObj.urls[entryType]).then(res => {
         let message = extractEntriesFromPage(entryType, res.data);
         if (message !== dataObj.savedMessages[entryType]) {
-            console.log(`=> Responding with 10 latest ${entryType} entries.\n`);
-            tg.sendMessage(dataObj.masterChatID, `🔴 *NEW ${entryType.toUpperCase()} ALERT*\n\n` + message, markD);
+            console.log(`=> Cron found updated ${entryType} entries.`);
+            Subscription.find({
+                type: entryType
+            }).then(subs => {
+                console.log(`=> Sending to ${subs.length} subscribers.`);
+                subs.forEach(sub => {
+                    console.log(`=> Sending to ${sub.chat_id}: ${sub.username}`);
+                    tg.sendMessage(sub.chat_id, `🔴 *NEW ${entryType.toUpperCase()} ALERT*\n\n` + message, markD);
+                });
+            }).catch(err => {
+                console.log(`=> Error in db fetch:`);
+                console.log(err);
+                tg.sendMessage(dataObj.masterChatID, `Some error occured in ${entryType}-checker cron while fetching from db.\n`, markD);
+            });
             dataObj.savedMessages[entryType] = message;
         } else {
             console.log('=> No updates.\n');
