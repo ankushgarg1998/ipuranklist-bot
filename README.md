@@ -34,20 +34,19 @@ Control the IPU Ranklist Bot by sending these commands:
 - **/help** - Gets this message anytime, if you're stuck.
 
 ### Fetching last 10 uploads
-- **/latestResults** - To fetch the last 10 results uploaded.
-- **/latestDatesheets** - To fetch the last 10 datesheets uploaded.
-- **/latestCirculars** - To fetch the last 10 circulars uploaded.
+- **/results** - To fetch the last 10 results uploaded.
+- **/datesheets** - To fetch the last 10 datesheets uploaded.
+- **/circulars** - To fetch the last 10 circulars uploaded.
 
 ### Subscribing to updates of a page.
-- **/subscribeResults** - To subscribe to result updates.
-- **/subscribeDatesheets** - To subscribe to datesheet updates.
-- **/subscribeCirculars** - To subscribe to circular updates.
+- **/subscriberesults** - To subscribe to result updates.
+- **/subscribedatesheets** - To subscribe to datesheet updates.
+- **/subscribecirculars** - To subscribe to circular updates.
 
 ### Unsubscribe from updates of a page.
-- **/unsubscribeResults** - To unsubscribe from results.
-- **/unsubscribeDatesheets** - To unsubscribe from datesheets.
-- **/unsubscribeCirculars** - To unsubscribe from circulars.
-- **/unsubscribeAll** - To unsunbscribe from all updates.
+- **/unsubscriberesults** - To unsubscribe from results.
+- **/unsubscribedatesheets** - To unsubscribe from datesheets.
+- **/unsubscribecirculars** - To unsubscribe from circulars.
 
 
 ## TECH
@@ -57,7 +56,7 @@ It is developed in [NodeJS](https://nodejs.org/en/) using the awesome [Telegraf]
 <hr>
 
 ## CONTRIBUTE
-- Raise an issue and tell us you'd like to work on. Or work on an existing issue.
+- Raise an issue to specify what you'd like to work on. Or mention that you're working on an existing issue.
 - Fork the repository
 - Commit your code
 - Create a Pull Request
