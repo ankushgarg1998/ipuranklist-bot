@@ -1,7 +1,7 @@
 {
     "masterUserName": "ankushgarg1998",
     "masterChatID": 313164959,
-    "help": "*HELP*",
+    "startMessage": "Hey! I'm the *IPU Ranklist Bot*, I can fetch results, datesheets and circulars from the [GGSIPU Website](http://ipu.ac.in/). My code is [open-source](https://github.com/ankushgarg1998/ipuranklist-bot), so you can also contribute to my development too. \n\nYou can control me by the following commands:\n\n/help - Gets you a descriptive list of all the commands.\n\n*Fetch Commands*\n/results - Fetches latest results on the website\n/datesheets - Fetches latest datesheets on the website\n/circulars - Fetches latest circulars on the website\n\n*Subscribe Commands*\nUse these commands to subscribe to a particular section of the website. So that whenever there's a new file uploaded on this section of the website. I'll notify you.\n/subscriberesults - Get notified about new results\n/subscribedatesheets - Get notified about new datesheets\n/subscribecirculars - Get notified about new circulars\n\n*Unsubscribe Commands*\nUse these commands to unsubscribe from the updates.\n/unsubscriberesults - Stop receiving result updates\n/unsubscribedatesheets - Stop receiving datesheet updates\n/unsubscribecirculars - Stop receiving circular updates\n\n_But wait, you don't actually have to type these commands. See that *[\/]* (slash box) at the bottom-right. Just press that and you can select any command._",
     "subscribers": [],
     "savedMessages": {
         "result": "",

@@ -195,6 +195,13 @@ bot.command('unsubscribecirculars', (ctx) => {
     handleUnsubscribeCommand(entryType, ctx);
 });
 
+// --- HELP COMMANDS ---
+// The start command.
+bot.command('start', ((ctx) => ctx.replyWithMarkdown(dataObj.startMessage)));
+
+// The help command.
+bot.command('help', ((ctx) => ctx.replyWithMarkdown(dataObj.startMessage)));
+
 // --- TEST COMMANDS ---
 // Test command to check if the bot is running.
 bot.command('test', ((ctx) => ctx.replyWithMarkdown('Test Successful.')));
