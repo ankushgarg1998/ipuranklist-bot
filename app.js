@@ -211,7 +211,7 @@ bot.command('test', ((ctx) => ctx.replyWithMarkdown('Test Successful.')));
 // -----------------------------------------------------------------------------------------------
 // === CRONS ===
 // Cron frequency setup
-var cronFrequency = '*/5 * * * *';
+var cronFrequency = '* * * * *';
 
 // Cron to update about result updates.
 cron.schedule(cronFrequency, () => {
