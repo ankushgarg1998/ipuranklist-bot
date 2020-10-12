@@ -5,7 +5,9 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ankushgarg1998/ipuranklist-bot)
 
 
-In very simple words, the [**IPU Ranklist Bot**]((https://web.telegram.org/#/im?p=@ipuranklist_bot)) is a [telegram bot](https://telegram.org/blog/bot-revolution) that notifies you about updates on the [GGSIPU website](http://ipu.ac.in/), so that you don't have to reload it a thousand times a day waiting for a result, datesheet or circular. 
+In very simple words, the [**IPU Ranklist Bot**]((https://web.telegram.org/#/im?p=@ipuranklist_bot)) is a [telegram bot](https://telegram.org/blog/bot-revolution) that notifies you about updates on the [GGSIPU website](http://ipu.ac.in/), so that you don't have to reload it a thousand times a day waiting for a result, datesheet or circular.
+
+[Click Here](https://web.telegram.org/#/im?p=@ipuranklist_bot) to instantly start using the bot.
 
 <img src="./screenshots/1.jpg" alt="screenshot" width="250px"/>&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="./screenshots/2.jpg" alt="screenshot" width="250px"/>&nbsp;&nbsp;&nbsp;&nbsp;
