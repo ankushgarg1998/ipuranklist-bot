@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "jsdom": "^16.4.0",
+    "mongoose": "^5.10.9",
     "node-cron": "^2.0.3",
     "telegraf": "^3.38.0"
   }
