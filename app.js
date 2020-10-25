@@ -38,44 +38,59 @@ function extractEntriesFromPage(entryType, htmlPage) {
     return message;
 }
 
+// Prepend zeroes for 2 digit numbers.
+function pz(num) {
+    return ('0' + num).slice(-2);
+}
 
+// logger
+function log(str) {
+    let currentdate = new Date();
+    let datetime = pz(currentdate.getDate()) + "/"
+        + pz(currentdate.getMonth() + 1) + "/"
+        + currentdate.getFullYear() + " @ "
+        + pz(currentdate.getHours()) + ":"
+        + pz(currentdate.getMinutes()) + ":"
+        + pz(currentdate.getSeconds());
+    console.log(`${datetime} -> ${str}`);
+}
 
 // -----------------------------------------------------------------------------------------------
 // === HANDLER FUCTIONS ===
 // Function to handle 'fetch latest entries' command
 function handleFetchCommand(entryType, ctx) {
-    console.log(`Latest ${entryType} entries hit.`);
+    log(`Latest ${entryType} entries hit.`);
     ctx.replyWithMarkdown(`Fetching recent ${entryType}s ⏳`)
     axios.get(dataObj.urls[entryType]).then(res => {
         let message = extractEntriesFromPage(entryType, res.data);
-        console.log(`=> Responding with 10 latest ${entryType} entries.\n`);
+        log(`=> Responding with 10 latest ${entryType} entries.\n`);
         ctx.replyWithMarkdown(message);
     }, err => {
-        console.log(`=> Error in fetching:`);
-        console.log(err);
+        log(`=> Error in fetching:`);
+        log(err);
         ctx.replyWithMarkdown(`Some error occured while fetching the ${entryType}s. Please report this to @ankushgarg1998`);
     });
 }
 
 // Function to handle 'subscribe' commands
 function handleSubscribeCommand(entryType, ctx) {
-    console.log(`Subscribe ${entryType} entries hit. -> ${ctx.chat.id} : ${ctx.chat.username}`);
+    log(`Subscribe ${entryType} entries hit. -> ${ctx.chat.id} : ${ctx.chat.username}`);
     let subscriptionInstance = new Subscription({
         chat_id: ctx.chat.id,
         username: ctx.chat.username,
         type: entryType
     });
     subscriptionInstance.save().then(savedSubscription => {
-        console.log(`=> Subscription added.`);
+        log(`=> Subscription added.`);
         ctx.replyWithMarkdown(`You're now subscribed to ${entryType}s. You'll be notified as soon as any new ${entryType} is uploaded on the website. ✅`);
     }).catch(err => {
-        console.log(err.message);
+        log(err.message);
         if (err.code === 11000) {
-            console.log(`=> Already Subscribed.`);
+            log(`=> Already Subscribed.`);
             ctx.replyWithMarkdown(`You are already subscribed to ${entryType}s.`)
         } else {
-            console.log(`=> Error in subscription:`);
-            console.log(err);
+            log(`=> Error in subscription:`);
+            log(err);
             ctx.replyWithMarkdown(`There was an error in subscribing. Please report this to @ankushgarg1998`);
         }
     });
@@ -83,54 +98,69 @@ function handleSubscribeCommand(entryType, ctx) {
 
 // Function to handle 'unsubscribe' commands
 function handleUnsubscribeCommand(entryType, ctx) {
-    console.log(`Unsubscribe ${entryType} entries hit. -> ${ctx.chat.id} : ${ctx.chat.username}`);
+    log(`Unsubscribe ${entryType} entries hit. -> ${ctx.chat.id} : ${ctx.chat.username}`);
     let unsubscribeObject = {
         chat_id: ctx.chat.id,
         type: entryType
     };
     Subscription.deleteOne(unsubscribeObject).then(res => {
         if (res.deletedCount !== 0) {
-            console.log(`=> Unsubscribed.`);
+            log(`=> Unsubscribed.`);
             ctx.replyWithMarkdown(`You're now unsubscribed from ${entryType}s. ❌`);
         } else {
-            console.log(`=> Already Unsubscribed.`);
+            log(`=> Already Unsubscribed.`);
             ctx.replyWithMarkdown(`You are not subscribed to ${entryType}s.`)
         }
     }).catch(err => {
-        console.log(`=> Error in unsubscription:`);
-        console.log(err);
+        log(`=> Error in unsubscription:`);
+        log(err);
         ctx.replyWithMarkdown(`There was an error in unsubscribing. Please report this to @ankushgarg1998`);
     });
 }
 
 // Function to handle 'cron' executions
 function handleCronExecution(entryType) {
-    console.log(`Running the new-${entryType} checker cron.`);
+    log(`Running the new-${entryType} checker cron.`);
     axios.get(dataObj.urls[entryType]).then(res => {
         let message = extractEntriesFromPage(entryType, res.data);
         if (message !== dataObj.savedMessages[entryType]) {
-            console.log(`=> Cron found updated ${entryType} entries.`);
+            log(`=> Cron found updated ${entryType} entries.`);
             Subscription.find({
                 type: entryType
             }).then(subs => {
-                console.log(`=> Sending to ${subs.length} subscribers.`);
+                log(`=> Sending to ${subs.length} subscribers.`);
                 subs.forEach(sub => {
-                    console.log(`=> Sending to ${sub.chat_id}: ${sub.username}`);
-                    tg.sendMessage(sub.chat_id, `🔴 *NEW ${entryType.toUpperCase()} ALERT*\n\n` + message, markD);
+                    log(`=> Sending to ${sub.chat_id}: ${sub.username}`);
+                    tg.sendMessage(sub.chat_id, `🔴 *NEW ${entryType.toUpperCase()} ALERT*\n\n` + message, markD)
+                        .then(val => log(`=> Successful notification.`))
+                        .catch(err => {
+                            log(`=> Failed to notify`);
+                            log(err);
+                        })
                 });
             }).catch(err => {
-                console.log(`=> Error in db fetch:`);
-                console.log(err);
-                tg.sendMessage(dataObj.masterChatID, `Some error occured in ${entryType}-checker cron while fetching from db.\n`, markD);
+                log(`=> Error in db fetch:`);
+                log(err);
+                tg.sendMessage(dataObj.masterChatID, `Yo Ankush. Some error occured in ${entryType}-checker cron while fetching from db.\n`, markD)
+                    .then(val => log(`=> Notified Ankush.`))
+                    .catch(err => {
+                        log('=> Unable to notify Ankush about the error :');
+                        log(err);
+                    });
             });
             dataObj.savedMessages[entryType] = message;
         } else {
-            console.log('=> No updates.\n');
+            log('=> No updates.\n');
         }
     }, err => {
-        console.log(`=> Error in cron execution:`);
-        console.log(err);
-        tg.sendMessage(dataObj.masterChatID, `Some error occured in ${entryType}-checker cron.\n`, markD);
+        log(`=> Error in cron execution:`);
+        log(err);
+        tg.sendMessage(dataObj.masterChatID, `Yo Ankush. Some error occured in ${entryType}-checker cron.\n`, markD)
+            .then(val => log(`=> Notified Ankush.`))
+            .catch(err => {
+                log('=> Unable to notify Ankush about the error :');
+                log(err);
+            });
     });
 }
 
@@ -237,4 +267,4 @@ cron.schedule(cronFrequency, () => {
 // === LAUNCH ===
 // Launching the bot to handle all commands.
 bot.launch();
-console.log(`Telegram BOT started | ENV : ${process.env.NODE_ENV}`);
+log(`Telegram BOT started | ENV : ${process.env.NODE_ENV}`);
