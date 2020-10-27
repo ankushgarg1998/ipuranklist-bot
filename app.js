@@ -31,6 +31,7 @@ function extractEntriesFromPage(entryType, htmlPage) {
     message += " :\n";
     message += row.firstElementChild.firstElementChild.innerHTML
       .replace("\n\t", "")
+      .replace("&amp;", "&")
       .trim();
     message += "\n\n";
   });
