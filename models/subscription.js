@@ -7,8 +7,15 @@ var SubscriptionSchema = new mongoose.Schema({
     },
     username: {
         type: String,
-        required: true,
         trim: true
+    },
+      first_name: {
+      type: String,
+      trim: true,
+    },
+    last_name: {
+      type: String,
+      trim: true,
     },
     type: {
         type: String,

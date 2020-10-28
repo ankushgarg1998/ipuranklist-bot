@@ -32,7 +32,7 @@ function extractEntriesFromPage(entryType, htmlPage) {
     rows.forEach(row => {
         message += row.lastElementChild.innerHTML.trim();
         message += ' :\n';
-        message += row.firstElementChild.firstElementChild.innerHTML.replace('\n\t', '').trim();
+        message += row.firstElementChild.firstElementChild.innerHTML.replace('\n\t', '').replace("&amp;", "&").trim();
         message += '\n\n';
     });
     return message;
@@ -74,11 +74,13 @@ function handleFetchCommand(entryType, ctx) {
 
 // Function to handle 'subscribe' commands
 function handleSubscribeCommand(entryType, ctx) {
-    log(`Subscribe ${entryType} entries hit. -> ${ctx.chat.id} : ${ctx.chat.username}`);
+    log(`Subscribe ${entryType} entries hit. -> ${ctx.chat.id} : ${ctx.chat.username || ctx.chat.first_name + " " + ctx.chat.last_name}`);
     let subscriptionInstance = new Subscription({
         chat_id: ctx.chat.id,
         username: ctx.chat.username,
-        type: entryType
+        type: entryType,
+        first_name: ctx.chat.first_name,
+        last_name: ctx.chat.last_name,
     });
     subscriptionInstance.save().then(savedSubscription => {
         log(`=> Subscription added.`);
@@ -98,7 +100,7 @@ function handleSubscribeCommand(entryType, ctx) {
 
 // Function to handle 'unsubscribe' commands
 function handleUnsubscribeCommand(entryType, ctx) {
-    log(`Unsubscribe ${entryType} entries hit. -> ${ctx.chat.id} : ${ctx.chat.username}`);
+    log(`Unsubscribe ${entryType} entries hit. -> ${ctx.chat.id} : ${ctx.chat.username || ctx.chat.first_name + " " + ctx.chat.last_name}`);
     let unsubscribeObject = {
         chat_id: ctx.chat.id,
         type: entryType
