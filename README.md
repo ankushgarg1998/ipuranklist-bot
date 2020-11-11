@@ -37,23 +37,31 @@ To simply put, Telegram is a messaging application on steroids. If you're thinki
 
 ## COMMANDS
 Control the IPU Ranklist Bot by sending these commands:
+| Command                            | Function                                                 |
+|:-----------------------------------|:---------------------------------------------------------|
+| **/help**                          | Gets a list of commands, for when you're stuck.          |
 
-- **/help** - Gets a list of commands, for when you're stuck.
 
 ### Fetching last 10 uploads
-- **/results** - To fetch the last 10 results uploaded.
-- **/datesheets** - To fetch the last 10 datesheets uploaded.
-- **/circulars** - To fetch the last 10 circulars uploaded.
+| Command                            | Function                                                 |
+|:-----------------------------------|:---------------------------------------------------------|
+| **/results**                       | To fetch the last 10 results uploaded.                   |
+| **/datesheets**                    | To fetch the last 10 datesheets uploaded.                |
+| **/circulars**                     | To fetch the last 10 circulars uploaded.                 |
 
 ### Subscribing to updates of a page.
-- **/subscriberesults** - To subscribe to result updates.
-- **/subscribedatesheets** - To subscribe to datesheet updates.
-- **/subscribecirculars** - To subscribe to circular updates.
+| Command                            | Function                                                 |
+|:-----------------------------------|:---------------------------------------------------------|
+| **/subscriberesults**              | To subscribe to result updates.                          |
+| **/subscribedatesheets**           | To subscribe to datesheet updates.                       |
+| **/subscribecirculars**            | To subscribe to circular updates.                        |
 
 ### Unsubscribe from updates of a page.
-- **/unsubscriberesults** - To unsubscribe from results.
-- **/unsubscribedatesheets** - To unsubscribe from datesheets.
-- **/unsubscribecirculars** - To unsubscribe from circulars.
+| Command                            | Function                                                 |
+|:-----------------------------------|:---------------------------------------------------------|
+| **/unsubscriberesults**            | To unsubscribe from results.                             |
+| **/unsubscribedatesheets**         | To unsubscribe from datesheets.                          |
+| **/unsubscribecirculars**          | To unsubscribe from circulars.                           |
 
 
 ## TECH
