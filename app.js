@@ -32,7 +32,7 @@ function extractEntriesFromPage(entryType, htmlPage) {
     rows.forEach(row => {
         message += row.lastElementChild.innerHTML.trim();
         message += ' :\n';
-        message += row.firstElementChild.firstElementChild.innerHTML.replace('\n\t', '').replace(/&amp;/g, '&').replace(/&nbsp;/g,'  ').trim();
+        message += row.firstElementChild.firstElementChild.innerHTML.replace('\n\t', '').replace(/&amp;/g, '&').replace(/&nbsp;/g,'  ').replace('_', '-').trim();
         message += '\n\n';
     });
     return message;
