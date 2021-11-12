@@ -2,3 +2,4 @@
 keys_dev.js
 keys_prod.js
 config.json
+.DS_Store

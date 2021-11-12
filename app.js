@@ -30,12 +30,28 @@ function extractEntriesFromPage(entryType, htmlPage) {
     let rows = [...tb.children].slice(0, numberOfEntries);
     let message = `📅 *RECENT ${numberOfEntries} ${entryType.toUpperCase()}S :*\n\n`;
     rows.forEach(row => {
-        message += row.lastElementChild.innerHTML.trim();
-        message += ' :\n';
-        message += row.firstElementChild.firstElementChild.innerHTML.replace('\n\t', '').replace(/&amp;/g, '&').replace(/&nbsp;/g,'  ').replace('_', '-').trim();
-        message += '\n\n';
+        let dateElement = getPossiblySpanWrappedElement(row.lastElementChild);
+        message += `*${dateElement.innerHTML.trim()}:*\n`;
+        let titleElement = getPossiblySpanWrappedElement(row.firstElementChild).firstElementChild;
+        message += `${sanitizePdfTitle(titleElement.innerHTML)}\n\n`;
     });
     return message;
+}
+
+// Get possibly span wrapped element
+function getPossiblySpanWrappedElement(element) {
+    return element.innerHTML
+        .trim()
+        .startsWith("<span") ? element.firstElementChild : element;
+}
+
+// Sanitize PDF Title
+function sanitizePdfTitle(title) {
+    return title
+        .replace('\n\t', '')
+        .replace(/&amp;/g, '&')
+        .replace(/&nbsp;/g, '  ')
+        .replace('_', '-').trim();
 }
 
 // Prepend zeroes for 2 digit numbers.
