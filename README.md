@@ -1,4 +1,4 @@
-# The IPU Ranklist Telegram Bot
+# 🤖 The IPU Ranklist Telegram Bot
 
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=102)](https://github.com/ankushgarg1998/ipuranklist-bot)  &nbsp;&nbsp;
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ankushgarg1998/ipuranklist-bot)  &nbsp;&nbsp;

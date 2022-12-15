@@ -30,19 +30,21 @@ function extractEntriesFromPage(entryType, htmlPage) {
     let rows = [...tb.children].slice(0, numberOfEntries);
     let message = `📅 *RECENT ${numberOfEntries} ${entryType.toUpperCase()}S :*\n\n`;
     rows.forEach(row => {
-        let dateElement = getPossiblySpanWrappedElement(row.lastElementChild);
-        message += `*${dateElement.innerHTML.trim()}:*\n`;
-        let titleElement = getPossiblySpanWrappedElement(row.firstElementChild).firstElementChild;
-        message += `${sanitizePdfTitle(titleElement.innerHTML)}\n\n`;
+        let dateElementMessage = "---";
+        if (row.children.length !== 1) {
+            dateElementMessage = getPossiblySpanWrappedElement(row.lastElementChild);
+        }
+        message += `*${dateElementMessage}:*\n`;
+        let titleElementMessage = getPossiblySpanWrappedElement(row.firstElementChild);
+        message += `${sanitizePdfTitle(titleElementMessage)}\n\n`;
     });
     return message;
 }
 
 // Get possibly span wrapped element
 function getPossiblySpanWrappedElement(element) {
-    return element.innerHTML
-        .trim()
-        .startsWith("<span") ? element.firstElementChild : element;
+    let elementString = element.innerHTML.trim();
+    return elementString.replace(/<\/?[^>]+(>|$)/g, '');
 }
 
 // Sanitize PDF Title
@@ -50,7 +52,7 @@ function sanitizePdfTitle(title) {
     return title
         .replace('\n\t', '')
         .replace(/&amp;/g, '&')
-        .replace(/&nbsp;/g, '  ')
+        .replace(/&nbsp;/g, ' ')
         .replace('_', '-').trim();
 }
 
