@@ -7,6 +7,8 @@ const { Telegram, Telegraf } = require('telegraf');
 require('./config/config');
 var { mongoose } = require('./db/mongoose');
 var { Subscription } = require('./models/subscription');
+var { log } = require('./util/logger');
+var { callGitHubActions } = require('./client/githubActionsClient');
 var dataObj = JSON.parse(fs.readFileSync('./data/data.json', 'utf8'));
 
 
@@ -56,25 +58,9 @@ function sanitizePdfTitle(title) {
         .replace('_', '-').trim();
 }
 
-// Prepend zeroes for 2 digit numbers.
-function pz(num) {
-    return ('0' + num).slice(-2);
-}
-
-// logger
-function log(str) {
-    let currentdate = new Date();
-    let datetime = pz(currentdate.getDate()) + "/"
-        + pz(currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
-        + pz(currentdate.getHours()) + ":"
-        + pz(currentdate.getMinutes()) + ":"
-        + pz(currentdate.getSeconds());
-    console.log(`${datetime} -> ${str}`);
-}
 
 // -----------------------------------------------------------------------------------------------
-// === HANDLER FUCTIONS ===
+// === TELEGRAM COMMAND HANDLER FUNCTIONS ===
 // Function to handle 'fetch latest entries' command
 function handleFetchCommand(entryType, ctx) {
     log(`Latest ${entryType} entries hit.`);
@@ -145,6 +131,7 @@ function handleCronExecution(entryType) {
         let message = extractEntriesFromPage(entryType, res.data);
         if (message !== dataObj.savedMessages[entryType]) {
             log(`=> Cron found updated ${entryType} entries.`);
+            callGitHubActions(entryType, message);
             Subscription.find({
                 type: entryType
             }).then(subs => {
@@ -187,7 +174,7 @@ function handleCronExecution(entryType) {
 
 
 // -----------------------------------------------------------------------------------------------
-// === COMMANDS ===
+// === TELEGRAM COMMANDS CONTROLLERS ===
 // --- FETCH COMMANDS ---
 // Handling the fetch last 10 results.
 bot.command('results', (ctx) => {
@@ -287,4 +274,4 @@ cron.schedule(cronFrequency, () => {
 // === LAUNCH ===
 // Launching the bot to handle all commands.
 bot.launch();
-log(`Telegram BOT started | ENV : ${process.env.NODE_ENV}`);
+log(`Telegram BOT started | ENV : ${process.env.ENVIRONMENT}`);
