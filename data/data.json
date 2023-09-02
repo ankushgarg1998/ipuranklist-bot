@@ -12,5 +12,6 @@
         "result": "http://ggsipu.ac.in/ExamResults/ExamResultsmain.htm",
         "datesheet": "http://ipu.ac.in/exam_datesheet.php",
         "circular": "http://ipu.ac.in/notices.php"
-    }
+    },
+    "callGithubActions": false
 }

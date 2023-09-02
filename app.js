@@ -131,21 +131,12 @@ function handleCronExecution(entryType) {
         let message = extractEntriesFromPage(entryType, res.data);
         if (message !== dataObj.savedMessages[entryType]) {
             log(`=> Cron found updated ${entryType} entries.`);
-            callGitHubActions(entryType, message);
+            if (dataObj.callGitHubActions)
+                callGitHubActions(entryType, message);
             Subscription.find({
                 type: entryType
-            }).then(subs => {
-                log(`=> Sending to ${subs.length} subscribers.`);
-                subs.forEach(sub => {
-                    log(`=> Sending to ${sub.chat_id}: ${sub.username}`);
-                    tg.sendMessage(sub.chat_id, `🔴 *NEW ${entryType.toUpperCase()} ALERT*\n\n` + message, markD)
-                        .then(val => log(`=> Successful notification.`))
-                        .catch(err => {
-                            log(`=> Failed to notify`);
-                            log(err);
-                        })
-                });
-            }).catch(err => {
+            }).then(subs => notifySubscribers(subs, entryType, message))
+            .catch(err => {
                 log(`=> Error in db fetch:`);
                 log(err);
                 tg.sendMessage(dataObj.masterChatID, `Yo Ankush. Some error occured in ${entryType}-checker cron while fetching from db.\n`, markD)
@@ -168,6 +159,35 @@ function handleCronExecution(entryType) {
                 log('=> Unable to notify Ankush about the error :');
                 log(err);
             });
+    });
+}
+
+function notifySubscribers(subs, entryType, message) {
+    log(`=> Sending to ${subs.length} subscribers.`);
+    subs.forEach(sub => {
+        log(`=> Sending to ${sub.chat_id}: ${sub.username}`);
+        tg.sendMessage(sub.chat_id, `🔴 *NEW ${entryType.toUpperCase()} ALERT*\n\n` + message, markD)
+            .then(val => log(`=> Successful notification to ${sub.chat_id}: ${sub.username}.`))
+            .catch(err => {
+                log(`=> Failed to notify ${sub.chat_id}: ${sub.username}`);
+                log(err);
+                if (err.code === 403) {
+                    let unsubscribeObject = {
+                        chat_id: sub.chat_id,
+                        type: entryType
+                    };
+                    Subscription.deleteOne(unsubscribeObject).then(res => {
+                        if (res.deletedCount !== 0) {
+                            log(`=> Unsubscribed ${sub.chat_id}: ${sub.username}.`);
+                        } else {
+                            log(`=> Already Unsubscribed.`);
+                        }
+                    }).catch(err => {
+                        log(`=> Error in unsubscription:`);
+                        log(err);
+                    });
+                }
+            })
     });
 }
 
