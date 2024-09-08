@@ -5,14 +5,14 @@ function pz(num) {
 
 // logger
 function log(str) {
-    let currentdate = new Date();
-    let datetime = pz(currentdate.getDate()) + "/"
-        + pz(currentdate.getMonth() + 1) + "/"
-        + currentdate.getFullYear() + " @ "
-        + pz(currentdate.getHours()) + ":"
-        + pz(currentdate.getMinutes()) + ":"
-        + pz(currentdate.getSeconds());
+    let currentDate = new Date();
+    let datetime = pz(currentDate.getDate()) + "/"
+        + pz(currentDate.getMonth() + 1) + "/"
+        + currentDate.getFullYear() + " @ "
+        + pz(currentDate.getHours()) + ":"
+        + pz(currentDate.getMinutes()) + ":"
+        + pz(currentDate.getSeconds());
     console.log(`${datetime} -> ${str}`);
 }
 
-module.exports = { log }
+export { log }

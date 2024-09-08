@@ -1,10 +1,23 @@
-var env = process.env.NODE_ENV || 'development';
+import config from './config.json' assert { type: "json" };
 
-if(env === 'development' || env === 'test' || env === 'production') {
-    var config = require('./config.json');
-    var envConfig = config[env];
+const ENVIRONMENT = 'ENVIRONMENT';
+const ENVIRONMENTS = {
+    DEV: 'development',
+    PROD: 'production'
+};
 
-    Object.keys(envConfig).forEach((key) => {
+const setEnvConfigs = (env) => {
+    console.log(`Setting up environment | ENV : ${env}`);
+    const envConfig = config[env];
+    process.env[ENVIRONMENT] = env;
+    Object.keys(envConfig).forEach(key => {
         process.env[key] = envConfig[key];
     });
-}
+};
+
+const env = process.env.NODE_ENV || ENVIRONMENTS.DEV;
+setEnvConfigs(env);
+
+export default {
+    ENVIRONMENTS
+};
