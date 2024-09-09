@@ -25,7 +25,7 @@ jobs:
 
       - name: Create config.json file.
         run: |
-          mv ./config/config-boilerplate.json ./config/config.json
+          cp ./config/config-boilerplate.json ./config/config.json
 
       - name: Execute node script # run app.js
         env:
@@ -39,7 +39,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git diff-index --quiet HEAD || (git commit -a -m "updated data")
+          git diff-index --quiet HEAD || (git commit -a -m "Updated data object.")
 
       - name: Push changes
         uses: ad-m/github-push-action@v0.8.0
