@@ -63,10 +63,10 @@ const afterMain = () => {
     log('=> Main executed. Starting bot.');
     setupBotCommands();
     bot.launch();
-    // setTimeout(() => {
-    //     log('=> Stopping bot. Exiting process.');
-    //     process.exit(0);
-    // }, Constants.BOT_UPTIME);
+    setTimeout(() => {
+        log('=> Stopping bot. Exiting process.');
+        process.exit(0);
+    }, Constants.BOT_UPTIME);
 }
 
 
