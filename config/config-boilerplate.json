@@ -1,0 +1,12 @@
+{
+    "development": {
+        "ENVIRONMENT": "development",
+        "PORT": 8080,
+        "MONGODB_URI": "mongodb://localhost:27017/IPURBotDev",
+        "BOT_TOKEN": "<TELEGRAM_BOT_TOKEN_HERE>"
+    },
+    "production": {
+        "ENVIRONMENT": "production",
+        "PORT": 8080
+    }
+}

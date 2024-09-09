@@ -1,0 +1,48 @@
+name: Execute the bot script.
+
+run-name: ${{ github.actor }} executed the bot script.
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # run every 5 minutes
+  # workflow_dispatch: # run manually
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4 # Checkout the repository content to github runner
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.3.0' # install the node version needed
+
+      - name: Install npm packages
+        run: npm install # install the npm packages
+
+      - name: Create config.json file.
+        run: |
+          mv ./config/config-boilerplate.json ./config/config.json
+
+      - name: Execute node script # run app.js
+        env:
+          NODE_ENV: production
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: node app.js
+
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff-index --quiet HEAD || (git commit -a -m "updated data")
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
