@@ -9,6 +9,8 @@ In very simple words, the [**IPU Ranklist Bot**]((https://web.telegram.org/#/im?
 
 [Click Here](https://web.telegram.org/#/im?p=@ipuranklist_bot) to instantly start using the bot.
 
+> **Update**: This bot is now hosted using GitHub Actions. So replies will be a bit slow. Please expect a reply to all the commands within **5-10 minutes**.
+
 <img src="./screenshots/1.jpg" alt="screenshot" width="250px"/>&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="./screenshots/2.jpg" alt="screenshot" width="250px"/>&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="./screenshots/3.jpg" alt="screenshot" width="250px"/>
@@ -37,31 +39,32 @@ To simply put, Telegram is a messaging application on steroids. If you're thinki
 
 ## COMMANDS
 Control the IPU Ranklist Bot by sending these commands:
+
 | Command                            | Function                                                 |
 |:-----------------------------------|:---------------------------------------------------------|
 | **/help**                          | Gets a list of commands, for when you're stuck.          |
 
 
 ### Fetching last 10 uploads
-| Command                            | Function                                                 |
-|:-----------------------------------|:---------------------------------------------------------|
-| **/results**                       | To fetch the last 10 results uploaded.                   |
-| **/datesheets**                    | To fetch the last 10 datesheets uploaded.                |
-| **/circulars**                     | To fetch the last 10 circulars uploaded.                 |
+| Command                     | Function                                                 |
+|:----------------------------|:---------------------------------------------------------|
+| **/results**                | To fetch the last 10 results uploaded.                   |
+| **/datesheets**             | To fetch the last 10 datesheets uploaded.                |
+| **/circulars** `deprecated` | To fetch the last 10 circulars uploaded.                 |
 
 ### Subscribing to updates of a page.
-| Command                            | Function                                                 |
-|:-----------------------------------|:---------------------------------------------------------|
-| **/subscriberesults**              | To subscribe to result updates.                          |
-| **/subscribedatesheets**           | To subscribe to datesheet updates.                       |
-| **/subscribecirculars**            | To subscribe to circular updates.                        |
+| Command                              | Function                                                 |
+|:-------------------------------------|:---------------------------------------------------------|
+| **/subscriberesults**                | To subscribe to result updates.                          |
+| **/subscribedatesheets**             | To subscribe to datesheet updates.                       |
+| **/subscribecirculars** `deprecated` | To subscribe to circular updates.                        |
 
 ### Unsubscribe from updates of a page.
-| Command                            | Function                                                 |
-|:-----------------------------------|:---------------------------------------------------------|
-| **/unsubscriberesults**            | To unsubscribe from results.                             |
-| **/unsubscribedatesheets**         | To unsubscribe from datesheets.                          |
-| **/unsubscribecirculars**          | To unsubscribe from circulars.                           |
+| Command                                | Function                                                 |
+|:---------------------------------------|:---------------------------------------------------------|
+| **/unsubscriberesults**                | To unsubscribe from results.                             |
+| **/unsubscribedatesheets**             | To unsubscribe from datesheets.                          |
+| **/unsubscribecirculars** `deprecated` | To unsubscribe from circulars.                           |
 
 
 ## TECH
