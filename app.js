@@ -44,7 +44,7 @@ const updateEntries = async (entryType) => {
     } catch (err) {
         log(`=> Error in fetching ${entryType} entries:`);
         log(err);
-        await tg.sendMessage(dataObj['masterChatID'], `Error.\n Error in fetching ${entryType} entries.\n`, Constants.MARKDOWN);
+        await tg.sendMessage(dataObj['masterChatID'], `-ERROR-\nError in fetching ${entryType} entries.\n`, Constants.MARKDOWN);
     }
 };
 

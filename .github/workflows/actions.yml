@@ -5,7 +5,7 @@ run-name: ${{ github.actor }} executed the bot script.
 on:
   schedule:
     - cron: '*/5 * * * *' # run every 5 minutes
-  workflow_dispatch: # run manually
+#  workflow_dispatch: # run manually
 
 jobs:
   build:
